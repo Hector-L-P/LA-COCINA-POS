@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>La Cocina POS</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="tabs">
+    <button onclick="switchTab('posTab')" class="active">🧾 POS</button>
+    <button onclick="switchTab('adminTab')">📁 Admin Panel</button>
+  </div>
+
+  <!-- POS Tab -->
+  <div id="posTab" class="tab-content">
+    <img src="images/logo.png" alt="La Cocina Logo" class="logo" />
+
+    <div class="info">
+      <input id="customerName" placeholder="Customer Name" />
+      <input id="deliveryAddress" placeholder="Delivery Address" />
+      <input id="contactNumber" placeholder="Contact Number" />
+      <input id="deliveryFee" type="number" placeholder="Delivery Fee" value="0" />
+      <input id="manualReceiptNumber" placeholder="Receipt Number (Optional)" />
+    </div>
+
+    <h3>🍽️ Add Items</h3>
+    <div class="product-inputs">
+      <label>Item:
+        <select id="itemName" onchange="toggleBundleOptions()">
+          <option value="Empanada Mix">Empanada Mix</option>
+          <option value="Beef Empanadas">Beef Empanadas</option>
+          <option value="Chicken Empanadas">Chicken Empanadas</option>
+          <option value="Potato Empanadas">Potato Empanadas</option>
+          <option value="Red Velvet Cookies">Red Velvet Cookies</option>
+          <option value="Chocolate Chunk Cookies">Chocolate Chunk Cookies</option>
+        </select>
+      </label>
+
+      <div id="bundleOptions">
+        <strong>Empanada Flavors:</strong><br />
+        Beef: <input id="beefQty" type="number" min="0" value="0" />
+        Chicken: <input id="chickenQty" type="number" min="0" value="0" />
+        Potato: <input id="potatoQty" type="number" min="0" value="0" />
+      </div>
+
+      <label>Quantity: <input id="itemQty" type="number" value="1" min="1" /></label>
+      <button onclick="addItem()">➕ Add to Order</button>
+    </div>
+
+    <div class="cart">
+      <h3>🛒 Current Order</h3>
+      <ul id="cartList"></ul>
+      <p><strong>Subtotal:</strong> $<span id="subtotal">0.00</span></p>
+      <p><strong>Total:</strong> $<span id="total">0.00</span></p>
+      <button onclick="clearCart()">🧹 Clear Cart</button>
+      <button onclick="generateReceipt()">🧾 Generate Receipt</button>
+      <button onclick="downloadImage()">📥 Download Receipt (Image)</button>
+    </div>
+
+    <div id="receipt" class="receipt-preview"></div>
+  </div>
+
+  <!-- Admin Panel Tab -->
+  <div id="adminTab" class="tab-content" style="display: none;">
+    <h2>📁 Saved Receipts</h2>
+    <div id="receiptList">Loading saved receipts...</div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
